@@ -1,0 +1,23 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  get-names:
+    name: Get File Names
+    runs-on: ubuntu-latest
+    steps:
+      
+      - name: Get Changed Files
+        id: files
+        uses: Ana06/get-changed-files@v2.3.0
+        with:
+          format: 'csv'
+
+      - name: Print Changed Files
+        id: print
+        run: |
+          echo "added_modified - ${{ steps.files.outputs.added_modified }}"
+          echo "renamed - ${{ steps.files.outputs.renamed }}"
+          echo "added_modified_renamed - ${{ steps.files.outputs.added_modified_renamed }}"
